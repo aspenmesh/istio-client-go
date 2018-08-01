@@ -47,6 +47,10 @@ required = [
   name = "istio.io/api"
   branch = "release-0.8"
 
+[[constraint]]
+  name = "k8s.io/client-go"
+  branch = "release-6.0"
+
 [prune]
   non-go = true
   go-tests = true

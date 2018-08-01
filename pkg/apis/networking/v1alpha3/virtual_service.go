@@ -28,7 +28,7 @@ type VirtualService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec istiov1alpha3.VirtualService `json:"spec"`
+	Spec VirtualServiceSpec `json:"spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -39,4 +39,14 @@ type VirtualServiceList struct {
 	metav1.ListMeta `json:"metadata"`
 
 	Items []VirtualService `json:"items"`
+}
+
+type VirtualServiceSpec struct {
+	istiov1alpha3.VirtualService
+}
+
+// DeepCopyInto is a deepcopy function, copying the receiver, writing into out. in must be non-nil.
+// Based of https://github.com/istio/istio/blob/release-0.8/pilot/pkg/config/kube/crd/types.go#L450
+func (in *VirtualServiceSpec) DeepCopyInto(out *VirtualServiceSpec) {
+	*out = *in
 }

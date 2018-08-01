@@ -19,4 +19,6 @@ limitations under the License.
 
 package v1alpha3
 
+type DestinationRuleExpansion interface{}
+
 type VirtualServiceExpansion interface{}

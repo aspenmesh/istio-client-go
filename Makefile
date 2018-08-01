@@ -1,5 +1,11 @@
 PACKAGE := github.com/aspenmesh/istio-client-go
 
+ifeq ($(BRANCH_NAME)$(BUILD_ID),)
+  BUILDER_TAG := istio-client-go-builder
+else
+  BUILDER_TAG := localhost:5000/istio-client-go:${BRANCH_NAME}-${BUILD_ID}
+endif
+
 # pkg/apis is the location for CRD APIs.
 # pkg/client is auto generated code
 # zz_generated.deepcopy.go under pkg/apis/<group>/<version>/ is also generated
@@ -13,9 +19,9 @@ BOILERPLATE := aspenmesh-boilerplate.go.txt
 
 GROUP_VERSIONS := "networking:v1alpha3"
 
-all: generate-code
+all: generate-code test
 
-generate-code:
+generate-code: dev-setup
 	./vendor/k8s.io/code-generator/generate-groups.sh all \
 		$(PACKAGE)/pkg/client \
 		$(PACKAGE)/pkg/apis \
@@ -27,11 +33,21 @@ generate-code:
 dev-setup: Gopkg.toml Gopkg.lock
 	dep ensure --vendor-only
 
-clean:
+clean-generated:
 	rm -rf pkg/client
 	rm -rf $(GENERATED_FILES)
+
+clean:
+	rm -rf _build
+
+docker-build:
+	docker build --target=builder -t $(BUILDER_TAG) \
+		-f Dockerfile.builder .
+
+test: dev-setup
+	go build -v -o ${PWD}/_build/example-client ./cmd/example-client/...
 
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: all clean dev-setup print-%
+.PHONY: all clean-generated dev-setup print-% docker-build

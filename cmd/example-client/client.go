@@ -24,6 +24,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create istio client: %s", err)
 	}
+	// Test VirtualServices
 	vsList, err := ic.NetworkingV1alpha3().VirtualServices(namespace).List(metav1.ListOptions{})
 	if err != nil {
 		log.Fatalf("Failed to get VirtualService in %s namespace: %s", namespace, err)
@@ -31,5 +32,15 @@ func main() {
 	for i := range vsList.Items {
 		vs := vsList.Items[i]
 		log.Printf("Index: %d VirtualService Hosts: %+v\n", i, vs.Spec.GetHosts())
+	}
+
+	// Test DestinationRules
+	drList, err := ic.NetworkingV1alpha3().DestinationRules(namespace).List(metav1.ListOptions{})
+	if err != nil {
+		log.Fatalf("Failed to get DestinationRule in %s namespace: %s", namespace, err)
+	}
+	for i := range drList.Items {
+		dr := drList.Items[i]
+		log.Printf("Index: %d DestinationRule Host: %+v\n", i, dr.Spec.GetHost())
 	}
 }

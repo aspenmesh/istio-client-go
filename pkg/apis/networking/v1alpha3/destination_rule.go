@@ -41,6 +41,7 @@ type DestinationRuleList struct {
 	Items []DestinationRule `json:"items"`
 }
 
+// DestinationRuleSpec is a wrapper around Istio DestinationRule
 type DestinationRuleSpec struct {
 	istiov1alpha3.DestinationRule
 }

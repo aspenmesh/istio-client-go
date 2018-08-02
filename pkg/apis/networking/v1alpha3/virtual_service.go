@@ -41,6 +41,7 @@ type VirtualServiceList struct {
 	Items []VirtualService `json:"items"`
 }
 
+// VirtualServiceSpec is a wrapper around Istio VirtualService
 type VirtualServiceSpec struct {
 	istiov1alpha3.VirtualService
 }

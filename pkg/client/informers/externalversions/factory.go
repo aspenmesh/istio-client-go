@@ -25,6 +25,7 @@ import (
 	time "time"
 
 	versioned "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned"
+	authentication "github.com/aspenmesh/istio-client-go/pkg/client/informers/externalversions/authentication"
 	internalinterfaces "github.com/aspenmesh/istio-client-go/pkg/client/informers/externalversions/internalinterfaces"
 	networking "github.com/aspenmesh/istio-client-go/pkg/client/informers/externalversions/networking"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -124,7 +125,12 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
+	Authentication() authentication.Interface
 	Networking() networking.Interface
+}
+
+func (f *sharedInformerFactory) Authentication() authentication.Interface {
+	return authentication.New(f, f.namespace, f.tweakListOptions)
 }
 
 func (f *sharedInformerFactory) Networking() networking.Interface {

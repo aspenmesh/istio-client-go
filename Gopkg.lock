@@ -263,7 +263,10 @@
 
 [[projects]]
   name = "istio.io/api"
-  packages = ["networking/v1alpha3"]
+  packages = [
+    "authentication/v1alpha1",
+    "networking/v1alpha3"
+  ]
   revision = "8d67e57e3612dae1a3423795bce93a372cfe4fa4"
   version = "0.8.0"
 
@@ -412,6 +415,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2c35d8942cfba6dc3a6a09b0f466c3f817b9373793b30fe3d4f368d5c06135f0"
+  inputs-digest = "f302cf8f81a2eaad60b7d13ff8afaf6a638850298b72d25771e4bce28cb90df6"
   solver-name = "gps-cdcl"
   solver-version = 1

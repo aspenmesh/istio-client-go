@@ -10,14 +10,14 @@ endif
 # pkg/client is auto generated code
 # zz_generated.deepcopy.go under pkg/apis/<group>/<version>/ is also generated
 # code
-DIRS := pkg/apis/networking pkg/apis/networking/v1alpha3
+DIRS := pkg/apis/networking pkg/apis/networking/v1alpha3 pkg/apis/authentication pkg/apis/authentication/v1alpha1
 DEPS_ALL := $(foreach dir, $(DIRS), $(wildcard $(dir)/*.go))
 GENERATED_FILES_PATTERN := %zz_generated.deepcopy.go
 DEPS := $(filter-out $(GENERATED_FILES_PATTERN), $(DEPS_ALL))
 GENERATED_FILES := $(filter $(GENERATED_FILES_PATTERN), $(DEPS_ALL))
 BOILERPLATE := aspenmesh-boilerplate.go.txt
 
-GROUP_VERSIONS := "networking:v1alpha3"
+GROUP_VERSIONS := "networking:v1alpha3, authentication:v1alpha1"
 
 all: generate-code test
 

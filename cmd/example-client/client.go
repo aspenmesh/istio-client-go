@@ -43,4 +43,14 @@ func main() {
 		dr := drList.Items[i]
 		log.Printf("Index: %d DestinationRule Host: %+v\n", i, dr.Spec.GetHost())
 	}
+
+	// Test Policies
+	pList, err := ic.AuthenticationV1alpha1().Policies(namespace).List(metav1.ListOptions{})
+	if err != nil {
+		log.Fatalf("Failed to get Policy in %s namespace: %s", namespace, err)
+	}
+	for i := range pList.Items {
+		p := pList.Items[i]
+		log.Printf("Index: %d Policy Targets: %+v\n", i, p.Spec.GetTargets())
+	}
 }

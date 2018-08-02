@@ -1,6 +1,6 @@
 /*
 Portions Copyright 2017 The Kubernetes Authors.
-Portions Copyright 2018 Istio Authors.
+Portions Copyright 2018 Aspen Mesh Authors.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at

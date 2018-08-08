@@ -15,6 +15,7 @@ limitations under the License.
 package v1alpha1
 
 import (
+	"github.com/golang/protobuf/proto"
 	istiov1alpha1 "istio.io/api/authentication/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -29,6 +30,10 @@ type Policy struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Spec PolicySpec `json:"spec"`
+}
+
+func (p *Policy) GetSpecMessage() proto.Message {
+	return &p.Spec.Policy
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

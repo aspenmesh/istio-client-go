@@ -55,6 +55,8 @@ func (f *genericInformer) Lister() cache.GenericLister {
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
 	// Group=authentication.istio.io, Version=v1alpha1
+	case v1alpha1.SchemeGroupVersion.WithResource("meshpolicies"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Authentication().V1alpha1().MeshPolicies().Informer()}, nil
 	case v1alpha1.SchemeGroupVersion.WithResource("policies"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Authentication().V1alpha1().Policies().Informer()}, nil
 

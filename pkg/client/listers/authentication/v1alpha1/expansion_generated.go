@@ -19,6 +19,10 @@ limitations under the License.
 
 package v1alpha1
 
+// MeshPolicyListerExpansion allows custom methods to be added to
+// MeshPolicyLister.
+type MeshPolicyListerExpansion interface{}
+
 // PolicyListerExpansion allows custom methods to be added to
 // PolicyLister.
 type PolicyListerExpansion interface{}

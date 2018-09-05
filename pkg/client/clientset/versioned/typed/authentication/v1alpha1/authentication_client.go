@@ -28,12 +28,17 @@ import (
 
 type AuthenticationV1alpha1Interface interface {
 	RESTClient() rest.Interface
+	MeshPoliciesGetter
 	PoliciesGetter
 }
 
 // AuthenticationV1alpha1Client is used to interact with features provided by the authentication.istio.io group.
 type AuthenticationV1alpha1Client struct {
 	restClient rest.Interface
+}
+
+func (c *AuthenticationV1alpha1Client) MeshPolicies() MeshPolicyInterface {
+	return newMeshPolicies(c)
 }
 
 func (c *AuthenticationV1alpha1Client) Policies(namespace string) PolicyInterface {

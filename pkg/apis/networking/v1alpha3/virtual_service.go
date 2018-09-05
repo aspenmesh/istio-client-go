@@ -15,6 +15,7 @@ limitations under the License.
 package v1alpha3
 
 import (
+	"github.com/golang/protobuf/proto"
 	istiov1alpha3 "istio.io/api/networking/v1alpha3"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -29,6 +30,10 @@ type VirtualService struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Spec VirtualServiceSpec `json:"spec"`
+}
+
+func (vs *VirtualService) GetSpecMessage() proto.Message {
+	return &vs.Spec.VirtualService
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

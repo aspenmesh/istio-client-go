@@ -15,6 +15,7 @@ limitations under the License.
 package v1alpha3
 
 import (
+	"github.com/golang/protobuf/proto"
 	istiov1alpha3 "istio.io/api/networking/v1alpha3"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -29,6 +30,10 @@ type DestinationRule struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Spec DestinationRuleSpec `json:"spec"`
+}
+
+func (dr *DestinationRule) GetSpecMessage() proto.Message {
+	return &dr.Spec.DestinationRule
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

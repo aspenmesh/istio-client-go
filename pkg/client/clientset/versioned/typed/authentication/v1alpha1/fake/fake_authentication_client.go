@@ -29,6 +29,10 @@ type FakeAuthenticationV1alpha1 struct {
 	*testing.Fake
 }
 
+func (c *FakeAuthenticationV1alpha1) MeshPolicies() v1alpha1.MeshPolicyInterface {
+	return &FakeMeshPolicies{c}
+}
+
 func (c *FakeAuthenticationV1alpha1) Policies(namespace string) v1alpha1.PolicyInterface {
 	return &FakePolicies{c, namespace}
 }

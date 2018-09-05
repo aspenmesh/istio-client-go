@@ -53,4 +53,18 @@ func main() {
 		p := pList.Items[i]
 		log.Printf("Index: %d Policy Targets: %+v\n", i, p.Spec.GetTargets())
 	}
+
+	// Test MeshPolicies
+	mpList, err := ic.AuthenticationV1alpha1().MeshPolicies().List(metav1.ListOptions{})
+	if err != nil {
+		log.Fatalf("Failed to list MeshPolicies", err)
+	}
+	for i := range mpList.Items {
+		mp := mpList.Items[i]
+		log.Printf("Index: %d MeshPolicy Name: %+v\n", i, mp.ObjectMeta.Name)
+		_, err := ic.AuthenticationV1alpha1().MeshPolicies().Get(mp.ObjectMeta.Name, metav1.GetOptions{})
+		if err != nil {
+			log.Fatalf("Failed to get MeshPolicy named %s", mp.ObjectMeta.Name)
+		}
+	}
 }

@@ -25,6 +25,8 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
+	// MeshPolicies returns a MeshPolicyInformer.
+	MeshPolicies() MeshPolicyInformer
 	// Policies returns a PolicyInformer.
 	Policies() PolicyInformer
 }
@@ -38,6 +40,11 @@ type version struct {
 // New returns a new Interface.
 func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakListOptions internalinterfaces.TweakListOptionsFunc) Interface {
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
+}
+
+// MeshPolicies returns a MeshPolicyInformer.
+func (v *version) MeshPolicies() MeshPolicyInformer {
+	return &meshPolicyInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // Policies returns a PolicyInformer.

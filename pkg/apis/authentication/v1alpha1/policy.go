@@ -84,6 +84,6 @@ func (p *PolicySpec) UnmarshalJSON(b []byte) error {
 
 // DeepCopyInto is a deepcopy function, copying the receiver, writing into out. in must be non-nil.
 // Based of https://github.com/istio/istio/blob/release-0.8/pilot/pkg/config/kube/crd/types.go#L450
-func (p *PolicySpec) DeepCopyInto(out *PolicySpec) {
-	*out = *p
+func (in *PolicySpec) DeepCopyInto(out *PolicySpec) {
+	*out = *in
 }

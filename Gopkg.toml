@@ -67,3 +67,7 @@ required = [
     unused-packages = false
     non-go = false
     go-tests = false
+
+[[constraint]]
+  name = "github.com/gogo/protobuf"
+  version = "1.0.0"

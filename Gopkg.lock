@@ -18,10 +18,11 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:1ba798075c507fb2513d955f8c04314acdb233b269671224a602ed4dc550eb64"
+  digest = "1:c91e35f0fe38a0b4e477c3bcb0b86aa79fbc4c8331617e4d7c3a94ede36a74ae"
   name = "github.com/gogo/protobuf"
   packages = [
     "gogoproto",
+    "jsonpb",
     "proto",
     "protoc-gen-gogo/descriptor",
     "sortkeys",
@@ -420,6 +421,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/gogo/protobuf/jsonpb",
     "github.com/golang/glog",
     "github.com/golang/protobuf/proto",
     "istio.io/api/authentication/v1alpha1",

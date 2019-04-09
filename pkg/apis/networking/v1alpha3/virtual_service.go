@@ -15,9 +15,13 @@ limitations under the License.
 package v1alpha3
 
 import (
+	"bufio"
+	"bytes"
+	"github.com/gogo/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	istiov1alpha3 "istio.io/api/networking/v1alpha3"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"log"
 )
 
 // +genclient
@@ -49,6 +53,32 @@ type VirtualServiceList struct {
 // VirtualServiceSpec is a wrapper around Istio VirtualService
 type VirtualServiceSpec struct {
 	istiov1alpha3.VirtualService
+}
+
+// Adapted from https://github.com/michaelkipper/istio-client-go/commit/7c8e95b5d9220d47c107bb6f3b0b71fbc8af3ef7#diff-1c6fa6bfc320013a249f4b6d0ccdd928R65
+func (p *VirtualServiceSpec) MarshalJSON() ([]byte, error) {
+	buffer := bytes.Buffer{}
+	writer := bufio.NewWriter(&buffer)
+	marshaler := jsonpb.Marshaler{}
+	err := marshaler.Marshal(writer, &p.VirtualService)
+	if err != nil {
+		log.Printf("Could not marshal PolicySpec. Error: %v", err)
+		return nil, err
+	}
+
+	writer.Flush()
+	return buffer.Bytes(), nil
+}
+
+func (p *VirtualServiceSpec) UnmarshalJSON(b []byte) error {
+	reader := bytes.NewReader(b)
+	unmarshaler := jsonpb.Unmarshaler{}
+	err := unmarshaler.Unmarshal(reader, &p.VirtualService)
+	if err != nil {
+		log.Printf("Could not unmarshal PolicySpec. Error: %v", err)
+		return err
+	}
+	return nil
 }
 
 // DeepCopyInto is a deepcopy function, copying the receiver, writing into out. in must be non-nil.

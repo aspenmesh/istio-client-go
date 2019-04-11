@@ -18,7 +18,7 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:c91e35f0fe38a0b4e477c3bcb0b86aa79fbc4c8331617e4d7c3a94ede36a74ae"
+  digest = "1:895d2773c9e78e595dd5f946a25383d579d3094a9d8d9306dba27359f190f275"
   name = "github.com/gogo/protobuf"
   packages = [
     "gogoproto",
@@ -29,8 +29,8 @@
     "types",
   ]
   pruneopts = "NUT"
-  revision = "1adfc126b41513cc696b209667c8656ea7aac67c"
-  version = "v1.0.0"
+  revision = "ba06b47c162d49f2af050fb4c75bcbc86a159d5c"
+  version = "v1.2.1"
 
 [[projects]]
   branch = "master"
@@ -105,14 +105,6 @@
   revision = "0fb14efe8c47ae851c0034ed7a448854d3d34cf3"
 
 [[projects]]
-  branch = "master"
-  digest = "1:b7f860847a1d71f925ba9385ed95f1ebc0abfeb418a78e219ab61f48fdfeffad"
-  name = "github.com/howeyc/gopass"
-  packages = ["."]
-  pruneopts = "NUT"
-  revision = "bf9dde6d0d2c004a008c27aaee91170c786f6db8"
-
-[[projects]]
   digest = "1:9a52adf44086cead3b384e5d0dbf7a1c1cce65e67552ee3383a8561c42a18cd3"
   name = "github.com/imdario/mergo"
   packages = ["."]
@@ -125,16 +117,7 @@
   name = "github.com/json-iterator/go"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "ab8a2e0c74be9d3be70b3184d9acc634935ded82"
-  version = "1.1.4"
-
-[[projects]]
-  digest = "1:8b3234b10eacd5edea45bf0c13a585b608749da23f94aaf29b46d9ef8a8babf4"
-  name = "github.com/juju/ratelimit"
-  packages = ["."]
-  pruneopts = "NUT"
-  revision = "59fac5042749a5afb9af70e813da1dd5474f0167"
-  version = "1.0.1"
+  revision = "f2b4162afba35581b6d4a50d3b8f34e33c144682"
 
 [[projects]]
   digest = "1:2f42fa12d6911c7b7659738758631bec870b7e9b4c6be5444f963cdcfccc191f"
@@ -186,10 +169,9 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:6d7de2772106e33e0cb33c2090676376957593504362503c95d56b321d694354"
+  digest = "1:f1d86284e32b50c39145025672d1e530176c19f9fd5cd60c82c0e01da0b52f97"
   name = "golang.org/x/net"
   packages = [
-    "context",
     "http/httpguts",
     "http2",
     "http2/hpack",
@@ -234,6 +216,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:9fdc2b55e8e0fafe4b41884091e51e77344f7dc511c5acedcfd98200003bff90"
+  name = "golang.org/x/time"
+  packages = ["rate"]
+  pruneopts = "NUT"
+  revision = "9d24e82272b4f38b78bc8cff74fa936d31ccd8ef"
+
+[[projects]]
+  branch = "master"
   digest = "1:1615b21484a1d35e0b3362026786b14add76026c2cfe506c49fb74393d2414c2"
   name = "golang.org/x/tools"
   packages = [
@@ -261,19 +251,19 @@
   version = "v2.2.1"
 
 [[projects]]
-  branch = "release-1.0"
-  digest = "1:c03bf532fe5938c522237268b1f5f5786430a7ce79dc222cf7b96e85c932a164"
+  branch = "release-1.1"
+  digest = "1:b3d283f539aee85a61b0cb687d85e9344696d0d4df92b909c334c64ecd82dcf9"
   name = "istio.io/api"
   packages = [
     "authentication/v1alpha1",
     "networking/v1alpha3",
   ]
   pruneopts = "NUT"
-  revision = "76349c53b87f03f1e610b3aa3843dba3c38138d7"
+  revision = "e9ab8d6a54a613b7a5877fdca1c033d5a8fbe86a"
 
 [[projects]]
   branch = "master"
-  digest = "1:475337f0a8e5258b8e96a084eaffd16beecb23b109efddc53e05a2cb9d3be851"
+  digest = "1:ab24c78181938293003a84bf956be09f195c57fa2f418ed6c1595f3198312f25"
   name = "k8s.io/api"
   packages = [
     "admissionregistration/v1alpha1",
@@ -300,6 +290,7 @@
     "rbac/v1alpha1",
     "rbac/v1beta1",
     "scheduling/v1alpha1",
+    "scheduling/v1beta1",
     "settings/v1alpha1",
     "storage/v1",
     "storage/v1alpha1",
@@ -309,7 +300,8 @@
   revision = "183f3326a9353bd6d41430fc80f96259331d029c"
 
 [[projects]]
-  digest = "1:6d938bcd986a567b417fc82ac716b88f5a76da4dcdf6ca3189aa921402d6961c"
+  branch = "release-1.11"
+  digest = "1:d65cc96a7b043ac5cb753d87ff5ac43e273b210b497ce1bc0b4817852282923a"
   name = "k8s.io/apimachinery"
   packages = [
     "pkg/api/errors",
@@ -340,30 +332,36 @@
     "pkg/util/framer",
     "pkg/util/intstr",
     "pkg/util/json",
+    "pkg/util/mergepatch",
     "pkg/util/net",
     "pkg/util/runtime",
     "pkg/util/sets",
+    "pkg/util/strategicpatch",
     "pkg/util/validation",
     "pkg/util/validation/field",
     "pkg/util/wait",
     "pkg/util/yaml",
     "pkg/version",
     "pkg/watch",
+    "third_party/forked/golang/json",
     "third_party/forked/golang/reflect",
   ]
   pruneopts = "NUT"
-  revision = "17529ec7eadb8de8e7dc835201455f53571f655a"
-  version = "kubernetes-1.10.4"
+  revision = "c182ff3b98419e7305cc361fd1811988591656cf"
 
 [[projects]]
-  branch = "release-6.0"
-  digest = "1:b8a28c6809ccdf60f268256a511738f9c3de6cc8a8351997056d8b474007bcc6"
+  branch = "release-8.0"
+  digest = "1:7e5ce2ced50556773b29fde1ca1fd181707503cde7c501893d308281b45f510b"
   name = "k8s.io/client-go"
   packages = [
     "discovery",
     "discovery/fake",
     "kubernetes/scheme",
+    "pkg/apis/clientauthentication",
+    "pkg/apis/clientauthentication/v1alpha1",
+    "pkg/apis/clientauthentication/v1beta1",
     "pkg/version",
+    "plugin/pkg/client/auth/exec",
     "rest",
     "rest/watch",
     "testing",
@@ -378,16 +376,18 @@
     "transport",
     "util/buffer",
     "util/cert",
+    "util/connrotation",
     "util/flowcontrol",
     "util/homedir",
     "util/integer",
+    "util/retry",
   ]
   pruneopts = "NUT"
-  revision = "e2680bfa771859c129bc5c8413fdb565af2b3dcd"
+  revision = "4022682532b3b46b46a31b4c6150cbf55174cf0f"
 
 [[projects]]
-  branch = "release-1.10"
-  digest = "1:34b0b3400ffdc2533ed4ea23721956638c2776ba49ca4c5def71dddcf0cdfd9b"
+  branch = "release-1.11"
+  digest = "1:332f5b5962cb4766ee8db261b948ec6c27a79a0006f1c638b4cbb4a203069aaf"
   name = "k8s.io/code-generator"
   packages = [
     "cmd/client-gen",
@@ -401,7 +401,7 @@
     "pkg/util",
   ]
   pruneopts = ""
-  revision = "9de8e796a74d16d2a285165727d04c185ebca6dc"
+  revision = "f8cba74510f397bac80157a6c4ccb0ffbc31b9d0"
 
 [[projects]]
   branch = "master"
@@ -416,6 +416,14 @@
   ]
   pruneopts = ""
   revision = "f659ec9d5207b3bf034eb9b7e22720d360d28712"
+
+[[projects]]
+  branch = "master"
+  digest = "1:42674e29bf0cf4662d49bd9528e24b9ecc4895b32d0be281f9cf04d3a7671846"
+  name = "k8s.io/kube-openapi"
+  packages = ["pkg/util/proto"]
+  pruneopts = "NUT"
+  revision = "94e1e7b7574c44c4c0f2007de6fe617e259191f3"
 
 [solve-meta]
   analyzer-name = "dep"

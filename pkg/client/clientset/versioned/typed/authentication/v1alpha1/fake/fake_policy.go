@@ -63,7 +63,7 @@ func (c *FakePolicies) List(opts v1.ListOptions) (result *v1alpha1.PolicyList, e
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &v1alpha1.PolicyList{}
+	list := &v1alpha1.PolicyList{ListMeta: obj.(*v1alpha1.PolicyList).ListMeta}
 	for _, item := range obj.(*v1alpha1.PolicyList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)

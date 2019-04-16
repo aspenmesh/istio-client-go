@@ -60,7 +60,7 @@ func (c *FakeMeshPolicies) List(opts v1.ListOptions) (result *v1alpha1.MeshPolic
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &v1alpha1.MeshPolicyList{}
+	list := &v1alpha1.MeshPolicyList{ListMeta: obj.(*v1alpha1.MeshPolicyList).ListMeta}
 	for _, item := range obj.(*v1alpha1.MeshPolicyList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)

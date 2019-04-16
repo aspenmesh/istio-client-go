@@ -63,7 +63,7 @@ func (c *FakeDestinationRules) List(opts v1.ListOptions) (result *v1alpha3.Desti
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &v1alpha3.DestinationRuleList{}
+	list := &v1alpha3.DestinationRuleList{ListMeta: obj.(*v1alpha3.DestinationRuleList).ListMeta}
 	for _, item := range obj.(*v1alpha3.DestinationRuleList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)

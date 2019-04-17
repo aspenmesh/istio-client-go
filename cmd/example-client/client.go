@@ -64,7 +64,7 @@ func main() {
 		log.Printf("Index: %d MeshPolicy Name: %+v\n", i, mp.ObjectMeta.Name)
 
 		// Known broken without the custom marshal/unmarshal code
-		log.Printf("MeshPolicy Value: %+v\n", i, mp.Spec.Policy.Peers)
+		log.Printf("Index %d MeshPolicy Value: %+v\n", i, mp.Spec.Policy.Peers)
 		_, err := ic.AuthenticationV1alpha1().MeshPolicies().Get(mp.ObjectMeta.Name, metav1.GetOptions{})
 		if err != nil {
 			log.Fatalf("Failed to get MeshPolicy named %s", mp.ObjectMeta.Name)

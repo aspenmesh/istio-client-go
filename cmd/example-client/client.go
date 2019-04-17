@@ -82,4 +82,16 @@ func main() {
 			log.Printf("Index: %d Gateway servers: %+v\n", i, s)
 		}
 	}
+
+	// Test ServiceEntry
+	seList, err := ic.NetworkingV1alpha3().ServiceEntries(namespace).List(metav1.ListOptions{})
+	if err != nil {
+		log.Fatalf("Failed to get ServiceEntry in %s namespace: %s", namespace, err)
+	}
+	for i := range seList.Items {
+		se := seList.Items[i]
+		for _, h := range se.Spec.GetHosts() {
+			log.Printf("Index: %d ServiceEntry hosts: %+v\n", i, h)
+		}
+	}
 }

@@ -64,10 +64,34 @@ func main() {
 		log.Printf("Index: %d MeshPolicy Name: %+v\n", i, mp.ObjectMeta.Name)
 
 		// Known broken without the custom marshal/unmarshal code
-		log.Printf("MeshPolicy Value: %+v\n", i, mp.Spec.Policy.Peers)
+		log.Printf("Index %d MeshPolicy Value: %+v\n", i, mp.Spec.Policy.Peers)
 		_, err := ic.AuthenticationV1alpha1().MeshPolicies().Get(mp.ObjectMeta.Name, metav1.GetOptions{})
 		if err != nil {
 			log.Fatalf("Failed to get MeshPolicy named %s", mp.ObjectMeta.Name)
+		}
+	}
+
+	// Test Gateway
+	gwList, err := ic.NetworkingV1alpha3().Gateways(namespace).List(metav1.ListOptions{})
+	if err != nil {
+		log.Fatalf("Failed to get Gateway in %s namespace: %s", namespace, err)
+	}
+	for i := range gwList.Items {
+		gw := gwList.Items[i]
+		for _, s := range gw.Spec.GetServers() {
+			log.Printf("Index: %d Gateway servers: %+v\n", i, s)
+		}
+	}
+
+	// Test ServiceEntry
+	seList, err := ic.NetworkingV1alpha3().ServiceEntries(namespace).List(metav1.ListOptions{})
+	if err != nil {
+		log.Fatalf("Failed to get ServiceEntry in %s namespace: %s", namespace, err)
+	}
+	for i := range seList.Items {
+		se := seList.Items[i]
+		for _, h := range se.Spec.GetHosts() {
+			log.Printf("Index: %d ServiceEntry hosts: %+v\n", i, h)
 		}
 	}
 }

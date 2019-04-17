@@ -27,6 +27,22 @@ type DestinationRuleListerExpansion interface{}
 // DestinationRuleNamespaceLister.
 type DestinationRuleNamespaceListerExpansion interface{}
 
+// GatewayListerExpansion allows custom methods to be added to
+// GatewayLister.
+type GatewayListerExpansion interface{}
+
+// GatewayNamespaceListerExpansion allows custom methods to be added to
+// GatewayNamespaceLister.
+type GatewayNamespaceListerExpansion interface{}
+
+// ServiceEntryListerExpansion allows custom methods to be added to
+// ServiceEntryLister.
+type ServiceEntryListerExpansion interface{}
+
+// ServiceEntryNamespaceListerExpansion allows custom methods to be added to
+// ServiceEntryNamespaceLister.
+type ServiceEntryNamespaceListerExpansion interface{}
+
 // VirtualServiceListerExpansion allows custom methods to be added to
 // VirtualServiceLister.
 type VirtualServiceListerExpansion interface{}

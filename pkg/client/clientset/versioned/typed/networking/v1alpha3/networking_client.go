@@ -29,6 +29,7 @@ import (
 type NetworkingV1alpha3Interface interface {
 	RESTClient() rest.Interface
 	DestinationRulesGetter
+	EnvoyFiltersGetter
 	GatewaysGetter
 	ServiceEntriesGetter
 	VirtualServicesGetter
@@ -41,6 +42,10 @@ type NetworkingV1alpha3Client struct {
 
 func (c *NetworkingV1alpha3Client) DestinationRules(namespace string) DestinationRuleInterface {
 	return newDestinationRules(c, namespace)
+}
+
+func (c *NetworkingV1alpha3Client) EnvoyFilters(namespace string) EnvoyFilterInterface {
+	return newEnvoyFilters(c, namespace)
 }
 
 func (c *NetworkingV1alpha3Client) Gateways(namespace string) GatewayInterface {

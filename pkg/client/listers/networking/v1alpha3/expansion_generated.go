@@ -27,6 +27,14 @@ type DestinationRuleListerExpansion interface{}
 // DestinationRuleNamespaceLister.
 type DestinationRuleNamespaceListerExpansion interface{}
 
+// EnvoyFilterListerExpansion allows custom methods to be added to
+// EnvoyFilterLister.
+type EnvoyFilterListerExpansion interface{}
+
+// EnvoyFilterNamespaceListerExpansion allows custom methods to be added to
+// EnvoyFilterNamespaceLister.
+type EnvoyFilterNamespaceListerExpansion interface{}
+
 // GatewayListerExpansion allows custom methods to be added to
 // GatewayLister.
 type GatewayListerExpansion interface{}

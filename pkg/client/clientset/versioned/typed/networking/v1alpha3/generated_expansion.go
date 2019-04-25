@@ -21,6 +21,8 @@ package v1alpha3
 
 type DestinationRuleExpansion interface{}
 
+type EnvoyFilterExpansion interface{}
+
 type GatewayExpansion interface{}
 
 type ServiceEntryExpansion interface{}

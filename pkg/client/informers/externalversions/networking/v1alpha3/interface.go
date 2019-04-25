@@ -27,6 +27,8 @@ import (
 type Interface interface {
 	// DestinationRules returns a DestinationRuleInformer.
 	DestinationRules() DestinationRuleInformer
+	// EnvoyFilters returns a EnvoyFilterInformer.
+	EnvoyFilters() EnvoyFilterInformer
 	// Gateways returns a GatewayInformer.
 	Gateways() GatewayInformer
 	// ServiceEntries returns a ServiceEntryInformer.
@@ -49,6 +51,11 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 // DestinationRules returns a DestinationRuleInformer.
 func (v *version) DestinationRules() DestinationRuleInformer {
 	return &destinationRuleInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// EnvoyFilters returns a EnvoyFilterInformer.
+func (v *version) EnvoyFilters() EnvoyFilterInformer {
+	return &envoyFilterInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // Gateways returns a GatewayInformer.

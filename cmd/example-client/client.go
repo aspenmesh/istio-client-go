@@ -57,7 +57,7 @@ func main() {
 	// Test MeshPolicies
 	mpList, err := ic.AuthenticationV1alpha1().MeshPolicies().List(metav1.ListOptions{})
 	if err != nil {
-		log.Fatalf("Failed to list MeshPolicies", err)
+		log.Fatal("Failed to list MeshPolicies", err)
 	}
 	for i := range mpList.Items {
 		mp := mpList.Items[i]

@@ -33,6 +33,10 @@ func (c *FakeNetworkingV1alpha3) DestinationRules(namespace string) v1alpha3.Des
 	return &FakeDestinationRules{c, namespace}
 }
 
+func (c *FakeNetworkingV1alpha3) EnvoyFilters(namespace string) v1alpha3.EnvoyFilterInterface {
+	return &FakeEnvoyFilters{c, namespace}
+}
+
 func (c *FakeNetworkingV1alpha3) Gateways(namespace string) v1alpha3.GatewayInterface {
 	return &FakeGateways{c, namespace}
 }

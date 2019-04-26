@@ -46,6 +46,7 @@ docker-build:
 
 test: dev-setup
 	go build -v -o ${PWD}/_build/example-client ./cmd/example-client/...
+	go test ./pkg/apis/...
 
 print-%:
 	@echo '$*=$($*)'

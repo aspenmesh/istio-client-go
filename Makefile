@@ -1,4 +1,5 @@
 PACKAGE := github.com/magneticio/istio-client-go
+DEST_DIR := $(abspath .)
 
 ifeq ($(BRANCH_NAME)$(BUILD_ID),)
   BUILDER_TAG := istio-client-go-builder
@@ -22,10 +23,12 @@ GROUP_VERSIONS := "networking:v1alpha3, authentication:v1alpha1"
 all: generate-code test
 
 generate-code: dev-setup
-	/bin/bash ${GOPATH}/pkg/mod/k8s.io/code-generator\@v0.0.0-20190717022600-77f3a1fe56bb/generate-groups.sh all \
+	/bin/bash -x ./generate-groups.sh all \
 		$(PACKAGE)/pkg/client \
 		$(PACKAGE)/pkg/apis \
 		$(GROUP_VERSIONS) \
+		$(PACKAGE) \
+		$(DEST_DIR) \
 		--go-header-file $(BOILERPLATE)
 
 # Verify and/or install dev depenedencies

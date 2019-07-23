@@ -34,8 +34,7 @@ generate-code: dev-setup
 # Verify and/or install dev depenedencies
 #
 dev-setup:
-	go mod download
-
+	echo "..."
 
 clean-generated:
 	rm -rf pkg/client
@@ -51,6 +50,7 @@ docker-build:
 test: dev-setup
 	# go build -v -o ${PWD}/_build/example-client ./cmd/example-client/...
 	go test ./pkg/apis/...
+	# go test ./...
 
 print-%:
 	@echo '$*=$($*)'

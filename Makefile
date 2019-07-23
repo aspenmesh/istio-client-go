@@ -1,4 +1,4 @@
-PACKAGE := github.com/aspenmesh/istio-client-go
+PACKAGE := github.com/magneticio/istio-client-go
 
 ifeq ($(BRANCH_NAME)$(BUILD_ID),)
   BUILDER_TAG := istio-client-go-builder
@@ -15,14 +15,14 @@ DEPS_ALL := $(foreach dir, $(DIRS), $(wildcard $(dir)/*.go))
 GENERATED_FILES_PATTERN := %zz_generated.deepcopy.go
 DEPS := $(filter-out $(GENERATED_FILES_PATTERN), $(DEPS_ALL))
 GENERATED_FILES := $(filter $(GENERATED_FILES_PATTERN), $(DEPS_ALL))
-BOILERPLATE := aspenmesh-boilerplate.go.txt
+BOILERPLATE := boilerplate.go.txt
 
 GROUP_VERSIONS := "networking:v1alpha3, authentication:v1alpha1"
 
 all: generate-code test
 
 generate-code: dev-setup
-	./vendor/k8s.io/code-generator/generate-groups.sh all \
+	/bin/bash ${GOPATH}/pkg/mod/k8s.io/code-generator\@v0.0.0-20190717022600-77f3a1fe56bb/generate-groups.sh all \
 		$(PACKAGE)/pkg/client \
 		$(PACKAGE)/pkg/apis \
 		$(GROUP_VERSIONS) \
@@ -30,8 +30,9 @@ generate-code: dev-setup
 
 # Verify and/or install dev depenedencies
 #
-dev-setup: Gopkg.toml Gopkg.lock
-	dep ensure --vendor-only
+dev-setup:
+	go mod download
+
 
 clean-generated:
 	rm -rf pkg/client
@@ -45,7 +46,7 @@ docker-build:
 		-f Dockerfile.builder .
 
 test: dev-setup
-	go build -v -o ${PWD}/_build/example-client ./cmd/example-client/...
+	# go build -v -o ${PWD}/_build/example-client ./cmd/example-client/...
 	go test ./pkg/apis/...
 
 print-%:

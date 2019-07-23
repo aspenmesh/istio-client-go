@@ -1,6 +1,6 @@
 FROM golang:1.10-stretch as builder
 
-WORKDIR /go/src/github.com/aspenmesh/istio-client-go
+WORKDIR /go/src/github.com/magneticio/istio-client-go
 
 RUN curl -s -L \
     https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64 \

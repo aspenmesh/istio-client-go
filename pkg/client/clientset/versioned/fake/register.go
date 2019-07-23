@@ -1,6 +1,7 @@
 /*
 Portions Copyright 2019 The Kubernetes Authors.
 Portions Copyright 2019 Aspen Mesh Authors.
+Portions Copyright 2019 Vamp Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,21 +21,21 @@ limitations under the License.
 package fake
 
 import (
-	authenticationv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/apis/authentication/v1alpha1"
-	networkingv1alpha3 "github.com/aspenmesh/istio-client-go/pkg/apis/networking/v1alpha3"
+	authenticationv1alpha1 "github.com/magneticio/istio-client-go/pkg/apis/authentication/v1alpha1"
+	networkingv1alpha3 "github.com/magneticio/istio-client-go/pkg/apis/networking/v1alpha3"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	serializer "k8s.io/apimachinery/pkg/runtime/serializer"
+	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 )
 
 var scheme = runtime.NewScheme()
 var codecs = serializer.NewCodecFactory(scheme)
 var parameterCodec = runtime.NewParameterCodec(scheme)
-
-func init() {
-	v1.AddToGroupVersion(scheme, schema.GroupVersion{Version: "v1"})
-	AddToScheme(scheme)
+var localSchemeBuilder = runtime.SchemeBuilder{
+	authenticationv1alpha1.AddToScheme,
+	networkingv1alpha3.AddToScheme,
 }
 
 // AddToScheme adds all types of this clientset into the given scheme. This allows composition
@@ -47,11 +48,13 @@ func init() {
 //   )
 //
 //   kclientset, _ := kubernetes.NewForConfig(c)
-//   aggregatorclientsetscheme.AddToScheme(clientsetscheme.Scheme)
+//   _ = aggregatorclientsetscheme.AddToScheme(clientsetscheme.Scheme)
 //
 // After this, RawExtensions in Kubernetes types will serialize kube-aggregator types
 // correctly.
-func AddToScheme(scheme *runtime.Scheme) {
-	authenticationv1alpha1.AddToScheme(scheme)
-	networkingv1alpha3.AddToScheme(scheme)
+var AddToScheme = localSchemeBuilder.AddToScheme
+
+func init() {
+	v1.AddToGroupVersion(scheme, schema.GroupVersion{Version: "v1"})
+	utilruntime.Must(AddToScheme(scheme))
 }

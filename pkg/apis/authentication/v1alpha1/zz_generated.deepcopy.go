@@ -3,6 +3,7 @@
 /*
 Portions Copyright 2019 The Kubernetes Authors.
 Portions Copyright 2019 Aspen Mesh Authors.
+Portions Copyright 2019 Vamp Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -56,7 +57,7 @@ func (in *MeshPolicy) DeepCopyObject() runtime.Object {
 func (in *MeshPolicyList) DeepCopyInto(out *MeshPolicyList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]MeshPolicy, len(*in))
@@ -126,7 +127,7 @@ func (in *Policy) DeepCopyObject() runtime.Object {
 func (in *PolicyList) DeepCopyInto(out *PolicyList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Policy, len(*in))

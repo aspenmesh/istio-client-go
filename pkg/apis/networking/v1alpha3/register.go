@@ -19,7 +19,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/aspenmesh/istio-client-go/pkg/apis/networking"
+	"github.com/magneticio/istio-client-go/pkg/apis/networking"
 )
 
 // SchemeGroupVersion is group version used to register these objects

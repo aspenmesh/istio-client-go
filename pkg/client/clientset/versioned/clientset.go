@@ -1,6 +1,7 @@
 /*
 Portions Copyright 2019 The Kubernetes Authors.
 Portions Copyright 2019 Aspen Mesh Authors.
+Portions Copyright 2019 Vamp Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,8 +21,10 @@ limitations under the License.
 package versioned
 
 import (
-	authenticationv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/authentication/v1alpha1"
-	networkingv1alpha3 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/networking/v1alpha3"
+	"fmt"
+
+	authenticationv1alpha1 "github.com/magneticio/istio-client-go/pkg/client/clientset/versioned/typed/authentication/v1alpha1"
+	networkingv1alpha3 "github.com/magneticio/istio-client-go/pkg/client/clientset/versioned/typed/networking/v1alpha3"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -30,11 +33,7 @@ import (
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	AuthenticationV1alpha1() authenticationv1alpha1.AuthenticationV1alpha1Interface
-	// Deprecated: please explicitly pick a version if possible.
-	Authentication() authenticationv1alpha1.AuthenticationV1alpha1Interface
 	NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface
-	// Deprecated: please explicitly pick a version if possible.
-	Networking() networkingv1alpha3.NetworkingV1alpha3Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -50,20 +49,8 @@ func (c *Clientset) AuthenticationV1alpha1() authenticationv1alpha1.Authenticati
 	return c.authenticationV1alpha1
 }
 
-// Deprecated: Authentication retrieves the default version of AuthenticationClient.
-// Please explicitly pick a version.
-func (c *Clientset) Authentication() authenticationv1alpha1.AuthenticationV1alpha1Interface {
-	return c.authenticationV1alpha1
-}
-
 // NetworkingV1alpha3 retrieves the NetworkingV1alpha3Client
 func (c *Clientset) NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface {
-	return c.networkingV1alpha3
-}
-
-// Deprecated: Networking retrieves the default version of NetworkingClient.
-// Please explicitly pick a version.
-func (c *Clientset) Networking() networkingv1alpha3.NetworkingV1alpha3Interface {
 	return c.networkingV1alpha3
 }
 
@@ -76,9 +63,14 @@ func (c *Clientset) Discovery() discovery.DiscoveryInterface {
 }
 
 // NewForConfig creates a new Clientset for the given config.
+// If config's RateLimiter is not set and QPS and Burst are acceptable,
+// NewForConfig will generate a rate-limiter in configShallowCopy.
 func NewForConfig(c *rest.Config) (*Clientset, error) {
 	configShallowCopy := *c
 	if configShallowCopy.RateLimiter == nil && configShallowCopy.QPS > 0 {
+		if configShallowCopy.Burst <= 0 {
+			return nil, fmt.Errorf("Burst is required to be greater than 0 when RateLimiter is not set and QPS is set to greater than 0")
+		}
 		configShallowCopy.RateLimiter = flowcontrol.NewTokenBucketRateLimiter(configShallowCopy.QPS, configShallowCopy.Burst)
 	}
 	var cs Clientset

@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	versionedclient "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned"
+	versionedclient "github.com/magneticio/istio-client-go/pkg/client/clientset/versioned"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/tools/clientcmd"
 )

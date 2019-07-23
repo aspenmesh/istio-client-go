@@ -1,6 +1,7 @@
 /*
 Portions Copyright 2019 The Kubernetes Authors.
 Portions Copyright 2019 Aspen Mesh Authors.
+Portions Copyright 2019 Vamp Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,8 +21,10 @@ limitations under the License.
 package v1alpha3
 
 import (
-	v1alpha3 "github.com/aspenmesh/istio-client-go/pkg/apis/networking/v1alpha3"
-	scheme "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/scheme"
+	"time"
+
+	v1alpha3 "github.com/magneticio/istio-client-go/pkg/apis/networking/v1alpha3"
+	scheme "github.com/magneticio/istio-client-go/pkg/client/clientset/versioned/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
@@ -76,11 +79,16 @@ func (c *serviceEntries) Get(name string, options v1.GetOptions) (result *v1alph
 
 // List takes label and field selectors, and returns the list of ServiceEntries that match those selectors.
 func (c *serviceEntries) List(opts v1.ListOptions) (result *v1alpha3.ServiceEntryList, err error) {
+	var timeout time.Duration
+	if opts.TimeoutSeconds != nil {
+		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
+	}
 	result = &v1alpha3.ServiceEntryList{}
 	err = c.client.Get().
 		Namespace(c.ns).
 		Resource("serviceentries").
 		VersionedParams(&opts, scheme.ParameterCodec).
+		Timeout(timeout).
 		Do().
 		Into(result)
 	return
@@ -88,11 +96,16 @@ func (c *serviceEntries) List(opts v1.ListOptions) (result *v1alpha3.ServiceEntr
 
 // Watch returns a watch.Interface that watches the requested serviceEntries.
 func (c *serviceEntries) Watch(opts v1.ListOptions) (watch.Interface, error) {
+	var timeout time.Duration
+	if opts.TimeoutSeconds != nil {
+		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
+	}
 	opts.Watch = true
 	return c.client.Get().
 		Namespace(c.ns).
 		Resource("serviceentries").
 		VersionedParams(&opts, scheme.ParameterCodec).
+		Timeout(timeout).
 		Watch()
 }
 
@@ -134,10 +147,15 @@ func (c *serviceEntries) Delete(name string, options *v1.DeleteOptions) error {
 
 // DeleteCollection deletes a collection of objects.
 func (c *serviceEntries) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+	var timeout time.Duration
+	if listOptions.TimeoutSeconds != nil {
+		timeout = time.Duration(*listOptions.TimeoutSeconds) * time.Second
+	}
 	return c.client.Delete().
 		Namespace(c.ns).
 		Resource("serviceentries").
 		VersionedParams(&listOptions, scheme.ParameterCodec).
+		Timeout(timeout).
 		Body(options).
 		Do().
 		Error()

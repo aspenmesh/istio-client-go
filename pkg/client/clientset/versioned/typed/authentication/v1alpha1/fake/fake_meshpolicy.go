@@ -1,6 +1,7 @@
 /*
 Portions Copyright 2019 The Kubernetes Authors.
 Portions Copyright 2019 Aspen Mesh Authors.
+Portions Copyright 2019 Vamp Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,7 +21,7 @@ limitations under the License.
 package fake
 
 import (
-	v1alpha1 "github.com/aspenmesh/istio-client-go/pkg/apis/authentication/v1alpha1"
+	v1alpha1 "github.com/magneticio/istio-client-go/pkg/apis/authentication/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -113,7 +114,7 @@ func (c *FakeMeshPolicies) DeleteCollection(options *v1.DeleteOptions, listOptio
 // Patch applies the patch and returns the patched meshPolicy.
 func (c *FakeMeshPolicies) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.MeshPolicy, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewRootPatchSubresourceAction(meshpoliciesResource, name, data, subresources...), &v1alpha1.MeshPolicy{})
+		Invokes(testing.NewRootPatchSubresourceAction(meshpoliciesResource, name, pt, data, subresources...), &v1alpha1.MeshPolicy{})
 	if obj == nil {
 		return nil, err
 	}

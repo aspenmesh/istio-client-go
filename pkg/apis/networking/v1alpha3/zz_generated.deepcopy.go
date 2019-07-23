@@ -3,6 +3,7 @@
 /*
 Portions Copyright 2019 The Kubernetes Authors.
 Portions Copyright 2019 Aspen Mesh Authors.
+Portions Copyright 2019 Vamp Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -56,7 +57,7 @@ func (in *DestinationRule) DeepCopyObject() runtime.Object {
 func (in *DestinationRuleList) DeepCopyInto(out *DestinationRuleList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]DestinationRule, len(*in))
@@ -126,7 +127,7 @@ func (in *EnvoyFilter) DeepCopyObject() runtime.Object {
 func (in *EnvoyFilterList) DeepCopyInto(out *EnvoyFilterList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]EnvoyFilter, len(*in))
@@ -196,7 +197,7 @@ func (in *Gateway) DeepCopyObject() runtime.Object {
 func (in *GatewayList) DeepCopyInto(out *GatewayList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Gateway, len(*in))
@@ -266,7 +267,7 @@ func (in *ServiceEntry) DeepCopyObject() runtime.Object {
 func (in *ServiceEntryList) DeepCopyInto(out *ServiceEntryList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]ServiceEntry, len(*in))
@@ -336,7 +337,7 @@ func (in *VirtualService) DeepCopyObject() runtime.Object {
 func (in *VirtualServiceList) DeepCopyInto(out *VirtualServiceList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]VirtualService, len(*in))

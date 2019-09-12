@@ -47,6 +47,14 @@
   version = "v1.3.2"
 
 [[projects]]
+  digest = "1:05f95ffdfcf651bdb0f05b40b69e7f5663047f8da75c72d58728acb59b5cc107"
+  name = "github.com/google/btree"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "4030bb1f1f0c35b30ca7009e9ebd06849dd45306"
+  version = "v1.0.0"
+
+[[projects]]
   digest = "1:52c5834e2bebac9030c97cc0798ac11c3aa8a39f098aeb419f142533da6cd3cc"
   name = "github.com/google/gofuzz"
   packages = ["."]
@@ -65,6 +73,17 @@
   pruneopts = "NUT"
   revision = "ab0dd09aa10e2952b28e12ecd35681b20463ebab"
   version = "v0.3.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:a86d65bc23eea505cd9139178e4d889733928fe165c7a008f41eaab039edf9df"
+  name = "github.com/gregjones/httpcache"
+  packages = [
+    ".",
+    "diskcache",
+  ]
+  pruneopts = "NUT"
+  revision = "901d90724c7919163f472a9812253fb26761123d"
 
 [[projects]]
   digest = "1:ed860d2b2c1d066d36a89c982eefc7d019badd534f60e87ab65d3d94f0797ef0"
@@ -115,6 +134,22 @@
   pruneopts = "NUT"
   revision = "4b7aa43c6742a2c18fdef89dd197aaae7dac7ccd"
   version = "1.0.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:89da0f0574bc94cfd0ac8b59af67bf76cdd110d503df2721006b9f0492394333"
+  name = "github.com/petar/GoLLRB"
+  packages = ["llrb"]
+  pruneopts = "NUT"
+  revision = "33fb24c13b99c46c93183c291836c573ac382536"
+
+[[projects]]
+  digest = "1:e1b94bd98c62fc2f905621fc6ba8209b7004e4513a1dfecb12a3de56ec2bb519"
+  name = "github.com/peterbourgon/diskv"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "0be1b92a6df0e4f5cb0a5d15fb7f643d0ad93ce6"
+  version = "v3.0.0"
 
 [[projects]]
   digest = "1:14715f705ff5dfe0ffd6571d7d201dd8e921030f8070321a79380d8ca4ec1a24"
@@ -299,10 +334,11 @@
   revision = "162827b552e84a48f0d9d45a8f10ea1623706663"
 
 [[projects]]
-  branch = "release-1.14"
-  digest = "1:f83b66888402b9a9adf7a1154f27e5b8299e67fe1de9d1e2d4ca17562345404a"
+  branch = "release-1.13"
+  digest = "1:c90ef886998c8f14bbb7a4fc6be3fe43f1f22e3f312de93baba7db0266c89186"
   name = "k8s.io/api"
   packages = [
+    "admissionregistration/v1alpha1",
     "admissionregistration/v1beta1",
     "apps/v1",
     "apps/v1beta1",
@@ -319,20 +355,15 @@
     "batch/v1beta1",
     "batch/v2alpha1",
     "certificates/v1beta1",
-    "coordination/v1",
     "coordination/v1beta1",
     "core/v1",
     "events/v1beta1",
     "extensions/v1beta1",
     "networking/v1",
-    "networking/v1beta1",
-    "node/v1alpha1",
-    "node/v1beta1",
     "policy/v1beta1",
     "rbac/v1",
     "rbac/v1alpha1",
     "rbac/v1beta1",
-    "scheduling/v1",
     "scheduling/v1alpha1",
     "scheduling/v1beta1",
     "settings/v1alpha1",
@@ -341,11 +372,11 @@
     "storage/v1beta1",
   ]
   pruneopts = "NUT"
-  revision = "e3a6b8045b0b303430f6d0c261fd9e35be50800e"
+  revision = "ebce17126a01f5fe02364d88c899816bcc2a8165"
 
 [[projects]]
-  branch = "release-1.14"
-  digest = "1:754bc618ffd9db9380bd8b4db61dd88e96fca6b4aaae996ad6d9972674bdf28f"
+  branch = "release-1.13"
+  digest = "1:8791110dece73ababc379d9dc9120868f8a3b0b9653ef6434bdc69c9e0fde814"
   name = "k8s.io/apimachinery"
   packages = [
     "pkg/api/errors",
@@ -392,11 +423,11 @@
     "third_party/forked/golang/reflect",
   ]
   pruneopts = "NUT"
-  revision = "a9f1d8a9c10182d101acf19b5145c3d4e9299adb"
+  revision = "bf4de9df677cd119930fa83483bad158956cdfcf"
 
 [[projects]]
-  branch = "release-11.0"
-  digest = "1:0246fe36c3f0bfeb140983438d81f558dbd3c3b3f2071209cf4651461fd83cb3"
+  branch = "release-10.0"
+  digest = "1:3cd3e00ca7ec0c9a2563c122da418e2b29db0db8a887a6ea57bdb8b70e8b72c6"
   name = "k8s.io/client-go"
   packages = [
     "discovery",
@@ -419,19 +450,20 @@
     "tools/metrics",
     "tools/pager",
     "transport",
+    "util/buffer",
     "util/cert",
     "util/connrotation",
     "util/flowcontrol",
     "util/homedir",
-    "util/keyutil",
+    "util/integer",
     "util/retry",
   ]
   pruneopts = "NUT"
-  revision = "6d55c1b1f1ca8ad83d572bbc3ca55ba5526d9d71"
+  revision = "ee6c071a42cffd19361fc3f4ca995829328a0678"
 
 [[projects]]
-  branch = "release-1.14"
-  digest = "1:0ca40cba3558ea765d0e7fa91ebd32d661909d5c331c49c2a271af66f0b5604d"
+  branch = "release-1.13"
+  digest = "1:5172e9b7f4c508cbaad2b2a7e8f8e6e395f6d0a2895eae563bbded454a1c9a76"
   name = "k8s.io/code-generator"
   packages = [
     "cmd/client-gen",
@@ -442,11 +474,10 @@
     "cmd/client-gen/generators/util",
     "cmd/client-gen/path",
     "cmd/client-gen/types",
-    "pkg/namer",
     "pkg/util",
   ]
   pruneopts = ""
-  revision = "6c2a4329ac290d921e8616cad41635c87dbb1518"
+  revision = "1ed9df051d9b54e2eae92139efac94483e7354d4"
 
 [[projects]]
   branch = "master"
@@ -479,18 +510,6 @@
   revision = "743ec37842bffe49dd4221d9026f30fb1d5adbc4"
 
 [[projects]]
-  branch = "master"
-  digest = "1:2d3f59daa4b479ff4e100a2e1d8fea6780040fdadc177869531fe4cc29407f55"
-  name = "k8s.io/utils"
-  packages = [
-    "buffer",
-    "integer",
-    "trace",
-  ]
-  pruneopts = "NUT"
-  revision = "3d4f5b7dea0b7c63c77d7fb1f0ee433ad8d54667"
-
-[[projects]]
   digest = "1:8730e0150dfb2b7e173890c8b9868e7a273082ef8e39f4940e3506a481cf895c"
   name = "sigs.k8s.io/yaml"
   packages = ["."]
@@ -516,7 +535,6 @@
     "k8s.io/apimachinery/pkg/runtime/schema",
     "k8s.io/apimachinery/pkg/runtime/serializer",
     "k8s.io/apimachinery/pkg/types",
-    "k8s.io/apimachinery/pkg/util/runtime",
     "k8s.io/apimachinery/pkg/watch",
     "k8s.io/client-go/discovery",
     "k8s.io/client-go/discovery/fake",

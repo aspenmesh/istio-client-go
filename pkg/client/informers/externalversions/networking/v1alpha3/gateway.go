@@ -22,7 +22,7 @@ package v1alpha3
 import (
 	time "time"
 
-	networking_v1alpha3 "github.com/aspenmesh/istio-client-go/pkg/apis/networking/v1alpha3"
+	networkingv1alpha3 "github.com/aspenmesh/istio-client-go/pkg/apis/networking/v1alpha3"
 	versioned "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned"
 	internalinterfaces "github.com/aspenmesh/istio-client-go/pkg/client/informers/externalversions/internalinterfaces"
 	v1alpha3 "github.com/aspenmesh/istio-client-go/pkg/client/listers/networking/v1alpha3"
@@ -71,7 +71,7 @@ func NewFilteredGatewayInformer(client versioned.Interface, namespace string, re
 				return client.NetworkingV1alpha3().Gateways(namespace).Watch(options)
 			},
 		},
-		&networking_v1alpha3.Gateway{},
+		&networkingv1alpha3.Gateway{},
 		resyncPeriod,
 		indexers,
 	)
@@ -82,7 +82,7 @@ func (f *gatewayInformer) defaultInformer(client versioned.Interface, resyncPeri
 }
 
 func (f *gatewayInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&networking_v1alpha3.Gateway{}, f.defaultInformer)
+	return f.factory.InformerFor(&networkingv1alpha3.Gateway{}, f.defaultInformer)
 }
 
 func (f *gatewayInformer) Lister() v1alpha3.GatewayLister {

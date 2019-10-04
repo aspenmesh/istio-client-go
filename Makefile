@@ -20,7 +20,7 @@ all: generate-code test
 print-%  : ; @echo $* = $($*)
 
 generate-code:
-	./scripts/generate-clientset.sh
+	GO111MODULE=on ./scripts/generate-clientset.sh
 
 clean-generated:
 	rm -rf pkg/client
@@ -34,8 +34,8 @@ docker-build:
 		-f Dockerfile.builder .
 
 test:
-	go build -v -o ${PWD}/_build/example-client ./cmd/example-client/...
-	go test ./pkg/apis/...
+	GO111MODULE=on go build -v -o ${PWD}/_build/example-client ./cmd/example-client/...
+	GO111MODULE=on go test ./pkg/apis/...
 
 print-%:
 	@echo '$*=$($*)'

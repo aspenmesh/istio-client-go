@@ -1,5 +1,3 @@
-PACKAGE := github.com/aspenmesh/istio-client-go
-
 ifeq ($(BRANCH_NAME)$(BUILD_ID),)
   BUILDER_TAG := istio-client-go-builder
 else
@@ -15,18 +13,14 @@ DEPS_ALL := $(foreach dir, $(DIRS), $(wildcard $(dir)/*.go))
 GENERATED_FILES_PATTERN := %zz_generated.deepcopy.go
 DEPS := $(filter-out $(GENERATED_FILES_PATTERN), $(DEPS_ALL))
 GENERATED_FILES := $(filter $(GENERATED_FILES_PATTERN), $(DEPS_ALL))
-BOILERPLATE := aspenmesh-boilerplate.go.txt
-
-GROUP_VERSIONS := "networking:v1alpha3, authentication:v1alpha1"
 
 all: generate-code test
 
+# print-% is used to aid troubleshooting. Type `make print-XYZ` to print the value of XYZ.
+print-%  : ; @echo $* = $($*)
+
 generate-code:
-	./vendor/k8s.io/code-generator/generate-groups.sh all \
-		$(PACKAGE)/pkg/client \
-		$(PACKAGE)/pkg/apis \
-		$(GROUP_VERSIONS) \
-		--go-header-file $(BOILERPLATE)
+	./scripts/generate-clientset.sh
 
 clean-generated:
 	rm -rf pkg/client

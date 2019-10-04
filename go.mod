@@ -28,9 +28,16 @@ require (
 	google.golang.org/appengine v1.6.2 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	istio.io/api v0.0.0-20190426021528-162827b552e8
-	k8s.io/api v0.0.0-20190817221950-ebce17126a01 // indirect
-	k8s.io/apimachinery v0.0.0-20190817221809-bf4de9df677c
-	k8s.io/client-go v0.0.0-20190817222206-ee6c071a42cf
+	k8s.io/api v0.0.0-20190923155552-eac758366a00 // indirect
+	k8s.io/apimachinery v0.0.0-20190923155427-ec87dd743e08
+	k8s.io/client-go v0.0.0-20190923155754-2bd34d193bac
 	k8s.io/klog v0.4.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20190816220812-743ec37842bf // indirect
+)
+
+replace (
+	k8s.io/api => k8s.io/api v0.0.0-20190923155552-eac758366a00
+	k8s.io/apimachinery => k8s.io/apimachinery v0.0.0-20190923155427-ec87dd743e08
+	k8s.io/client-go => k8s.io/client-go v0.0.0-20190923155754-2bd34d193bac
+	k8s.io/code-generator => k8s.io/code-generator v0.0.0-20190923155300-6206bfaf5c98
 )

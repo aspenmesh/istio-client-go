@@ -56,7 +56,7 @@ func (in *MeshPolicy) DeepCopyObject() runtime.Object {
 func (in *MeshPolicyList) DeepCopyInto(out *MeshPolicyList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]MeshPolicy, len(*in))
@@ -126,7 +126,7 @@ func (in *Policy) DeepCopyObject() runtime.Object {
 func (in *PolicyList) DeepCopyInto(out *PolicyList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Policy, len(*in))

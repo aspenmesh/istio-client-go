@@ -1,5 +1,3 @@
-PACKAGE := github.com/aspenmesh/istio-client-go
-
 ifeq ($(BRANCH_NAME)$(BUILD_ID),)
   BUILDER_TAG := istio-client-go-builder
 else
@@ -15,23 +13,14 @@ DEPS_ALL := $(foreach dir, $(DIRS), $(wildcard $(dir)/*.go))
 GENERATED_FILES_PATTERN := %zz_generated.deepcopy.go
 DEPS := $(filter-out $(GENERATED_FILES_PATTERN), $(DEPS_ALL))
 GENERATED_FILES := $(filter $(GENERATED_FILES_PATTERN), $(DEPS_ALL))
-BOILERPLATE := aspenmesh-boilerplate.go.txt
-
-GROUP_VERSIONS := "networking:v1alpha3, authentication:v1alpha1"
 
 all: generate-code test
 
-generate-code: dev-setup
-	./vendor/k8s.io/code-generator/generate-groups.sh all \
-		$(PACKAGE)/pkg/client \
-		$(PACKAGE)/pkg/apis \
-		$(GROUP_VERSIONS) \
-		--go-header-file $(BOILERPLATE)
+# print-% is used to aid troubleshooting. Type `make print-XYZ` to print the value of XYZ.
+print-%  : ; @echo $* = $($*)
 
-# Verify and/or install dev depenedencies
-#
-dev-setup: Gopkg.toml Gopkg.lock
-	dep ensure --vendor-only
+generate-code:
+	./scripts/generate-clientset.sh
 
 clean-generated:
 	rm -rf pkg/client
@@ -44,11 +33,11 @@ docker-build:
 	docker build --target=builder -t $(BUILDER_TAG) \
 		-f Dockerfile.builder .
 
-test: dev-setup
+test:
 	go build -v -o ${PWD}/_build/example-client ./cmd/example-client/...
 	go test ./pkg/apis/...
 
 print-%:
 	@echo '$*=$($*)'
 
-.PHONY: all clean-generated dev-setup print-% docker-build
+.PHONY: all clean-generated print-% docker-build

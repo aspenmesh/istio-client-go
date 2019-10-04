@@ -14,11 +14,7 @@ CLIENT_DIR=$SRC_DIR/github.com/aspenmesh/istio-client-go
 CODE_GEN_VER_FIELD=2
 CODE_GEN_VER=$(grep k8s.io/code-generator $CLIENT_DIR/go.mod | head -1 | cut -f $CODE_GEN_VER_FIELD -d\ )
 
-command -v client-gen > /dev/null 2>&1 &&
-go list -f '{{ .Dir }}' -m k8s.io/code-generator@$CODE_GEN_VER > /dev/null 2>&1 || {
-  echo >&2 "Can't find client-gen. Execute go get k8s.io/code-generator/cmd/client-gen@$CODE_GEN_VER"
-  exit 1
-}
+go get k8s.io/code-generator/cmd/client-gen@$CODE_GEN_VER
 
 # If this fails, go get k8s.io/code-generator
 CODE_GEN=$(go list -f '{{ .Dir }}' -m k8s.io/code-generator@$CODE_GEN_VER)

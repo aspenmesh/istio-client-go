@@ -69,6 +69,6 @@ func Test_EnvoyFilter(t *testing.T) {
 	assert.Equal(t, "envoy.filters.network.sni_cluster", envoyFilter.Spec.Filters[0].InsertPosition.RelativeTo)
 
 	// ListenerMatch
-	assert.Equal(t, istiov1alpha3.EnvoyFilter_ListenerMatch_GATEWAY, envoyFilter.Spec.Filters[0].ListenerMatch.ListenerType)
+	assert.Equal(t, istiov1alpha3.EnvoyFilter_DeprecatedListenerMatch_GATEWAY, envoyFilter.Spec.Filters[0].ListenerMatch.ListenerType)
 	assert.Equal(t, uint32(15013), envoyFilter.Spec.Filters[0].ListenerMatch.PortNumber)
 }

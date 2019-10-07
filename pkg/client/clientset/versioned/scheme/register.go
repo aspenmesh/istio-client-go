@@ -22,6 +22,7 @@ package scheme
 import (
 	authenticationv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/apis/authentication/v1alpha1"
 	networkingv1alpha3 "github.com/aspenmesh/istio-client-go/pkg/apis/networking/v1alpha3"
+	rbacv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/apis/rbac/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -35,6 +36,7 @@ var ParameterCodec = runtime.NewParameterCodec(Scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
 	authenticationv1alpha1.AddToScheme,
 	networkingv1alpha3.AddToScheme,
+	rbacv1alpha1.AddToScheme,
 }
 
 // AddToScheme adds all types of this clientset into the given scheme. This allows composition

@@ -8,7 +8,7 @@ endif
 # pkg/client is auto generated code
 # zz_generated.deepcopy.go under pkg/apis/<group>/<version>/ is also generated
 # code
-DIRS := pkg/apis/networking pkg/apis/networking/v1alpha3 pkg/apis/authentication pkg/apis/authentication/v1alpha1
+DIRS := pkg/apis/networking pkg/apis/networking/v1alpha3 pkg/apis/authentication pkg/apis/authentication/v1alpha1 pkg/apis/rbac pkg/apis/rbac/v1alpha1
 DEPS_ALL := $(foreach dir, $(DIRS), $(wildcard $(dir)/*.go))
 GENERATED_FILES_PATTERN := %zz_generated.deepcopy.go
 DEPS := $(filter-out $(GENERATED_FILES_PATTERN), $(DEPS_ALL))

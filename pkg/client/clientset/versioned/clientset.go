@@ -24,6 +24,7 @@ import (
 
 	authenticationv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/authentication/v1alpha1"
 	networkingv1alpha3 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/networking/v1alpha3"
+	rbacv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/rbac/v1alpha1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -33,6 +34,7 @@ type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	AuthenticationV1alpha1() authenticationv1alpha1.AuthenticationV1alpha1Interface
 	NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface
+	RbacV1alpha1() rbacv1alpha1.RbacV1alpha1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -41,6 +43,7 @@ type Clientset struct {
 	*discovery.DiscoveryClient
 	authenticationV1alpha1 *authenticationv1alpha1.AuthenticationV1alpha1Client
 	networkingV1alpha3     *networkingv1alpha3.NetworkingV1alpha3Client
+	rbacV1alpha1           *rbacv1alpha1.RbacV1alpha1Client
 }
 
 // AuthenticationV1alpha1 retrieves the AuthenticationV1alpha1Client
@@ -51,6 +54,11 @@ func (c *Clientset) AuthenticationV1alpha1() authenticationv1alpha1.Authenticati
 // NetworkingV1alpha3 retrieves the NetworkingV1alpha3Client
 func (c *Clientset) NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface {
 	return c.networkingV1alpha3
+}
+
+// RbacV1alpha1 retrieves the RbacV1alpha1Client
+func (c *Clientset) RbacV1alpha1() rbacv1alpha1.RbacV1alpha1Interface {
+	return c.rbacV1alpha1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -82,6 +90,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.rbacV1alpha1, err = rbacv1alpha1.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 
 	cs.DiscoveryClient, err = discovery.NewDiscoveryClientForConfig(&configShallowCopy)
 	if err != nil {
@@ -96,6 +108,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
 	cs.authenticationV1alpha1 = authenticationv1alpha1.NewForConfigOrDie(c)
 	cs.networkingV1alpha3 = networkingv1alpha3.NewForConfigOrDie(c)
+	cs.rbacV1alpha1 = rbacv1alpha1.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -106,6 +119,7 @@ func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.authenticationV1alpha1 = authenticationv1alpha1.New(c)
 	cs.networkingV1alpha3 = networkingv1alpha3.New(c)
+	cs.rbacV1alpha1 = rbacv1alpha1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

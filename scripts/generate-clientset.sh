@@ -10,9 +10,7 @@ fi
 SRC_DIR=$GOPATH/src
 CLIENT_DIR=$SRC_DIR/github.com/aspenmesh/istio-client-go
 
-# Field should be 2 for a require dependency and 4 for a replace dependency
-CODE_GEN_VER_FIELD=2
-CODE_GEN_VER=$(grep k8s.io/code-generator $CLIENT_DIR/go.mod | head -1 | cut -f $CODE_GEN_VER_FIELD -d\ )
+CODE_GEN_VER=$(grep "k8s.io/code-generator =>" $CLIENT_DIR/go.mod | head -1 | cut -f 4 -d\ )
 
 go get k8s.io/code-generator/cmd/client-gen@$CODE_GEN_VER
 

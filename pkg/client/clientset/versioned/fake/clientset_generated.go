@@ -25,6 +25,8 @@ import (
 	fakeauthenticationv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/authentication/v1alpha1/fake"
 	networkingv1alpha3 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/networking/v1alpha3"
 	fakenetworkingv1alpha3 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/networking/v1alpha3/fake"
+	rbacv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/rbac/v1alpha1"
+	fakerbacv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/client/clientset/versioned/typed/rbac/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -87,4 +89,9 @@ func (c *Clientset) AuthenticationV1alpha1() authenticationv1alpha1.Authenticati
 // NetworkingV1alpha3 retrieves the NetworkingV1alpha3Client
 func (c *Clientset) NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface {
 	return &fakenetworkingv1alpha3.FakeNetworkingV1alpha3{Fake: &c.Fake}
+}
+
+// RbacV1alpha1 retrieves the RbacV1alpha1Client
+func (c *Clientset) RbacV1alpha1() rbacv1alpha1.RbacV1alpha1Interface {
+	return &fakerbacv1alpha1.FakeRbacV1alpha1{Fake: &c.Fake}
 }

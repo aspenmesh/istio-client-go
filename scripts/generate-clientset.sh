@@ -23,6 +23,6 @@ chmod +x $CODE_GEN/generate-groups.sh
 
 $CODE_GEN/generate-groups.sh all \
   github.com/aspenmesh/istio-client-go/pkg/client github.com/aspenmesh/istio-client-go/pkg/apis \
-  "networking:v1alpha3, authentication:v1alpha1" \
+  "networking:v1alpha3, authentication:v1alpha1, rbac:v1alpha1" \
   --output-base $CLIENT_DIR/../../.. \
   --go-header-file $CLIENT_DIR/aspenmesh-boilerplate.go.txt

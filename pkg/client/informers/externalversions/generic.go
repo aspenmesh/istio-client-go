@@ -24,6 +24,7 @@ import (
 
 	v1alpha1 "github.com/aspenmesh/istio-client-go/pkg/apis/authentication/v1alpha1"
 	v1alpha3 "github.com/aspenmesh/istio-client-go/pkg/apis/networking/v1alpha3"
+	rbacv1alpha1 "github.com/aspenmesh/istio-client-go/pkg/apis/rbac/v1alpha1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -71,6 +72,14 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1alpha3().ServiceEntries().Informer()}, nil
 	case v1alpha3.SchemeGroupVersion.WithResource("virtualservices"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1alpha3().VirtualServices().Informer()}, nil
+
+		// Group=rbac.istio.io, Version=v1alpha1
+	case rbacv1alpha1.SchemeGroupVersion.WithResource("rbacconfigs"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Rbac().V1alpha1().RbacConfigs().Informer()}, nil
+	case rbacv1alpha1.SchemeGroupVersion.WithResource("serviceroles"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Rbac().V1alpha1().ServiceRoles().Informer()}, nil
+	case rbacv1alpha1.SchemeGroupVersion.WithResource("servicerolebindings"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Rbac().V1alpha1().ServiceRoleBindings().Informer()}, nil
 
 	}
 

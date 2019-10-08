@@ -28,6 +28,7 @@ import (
 	authentication "github.com/aspenmesh/istio-client-go/pkg/client/informers/externalversions/authentication"
 	internalinterfaces "github.com/aspenmesh/istio-client-go/pkg/client/informers/externalversions/internalinterfaces"
 	networking "github.com/aspenmesh/istio-client-go/pkg/client/informers/externalversions/networking"
+	rbac "github.com/aspenmesh/istio-client-go/pkg/client/informers/externalversions/rbac"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -176,6 +177,7 @@ type SharedInformerFactory interface {
 
 	Authentication() authentication.Interface
 	Networking() networking.Interface
+	Rbac() rbac.Interface
 }
 
 func (f *sharedInformerFactory) Authentication() authentication.Interface {
@@ -184,4 +186,8 @@ func (f *sharedInformerFactory) Authentication() authentication.Interface {
 
 func (f *sharedInformerFactory) Networking() networking.Interface {
 	return networking.New(f, f.namespace, f.tweakListOptions)
+}
+
+func (f *sharedInformerFactory) Rbac() rbac.Interface {
+	return rbac.New(f, f.namespace, f.tweakListOptions)
 }

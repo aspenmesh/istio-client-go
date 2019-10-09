@@ -94,4 +94,31 @@ func main() {
 			log.Printf("Index: %d ServiceEntry hosts: %+v\n", i, h)
 		}
 	}
+	// Test ServiceRoles
+	srList, err := ic.RbacV1alpha1().ServiceRoles(namespace).List(metav1.ListOptions{})
+	if err != nil {
+		log.Fatalf("Failed to get ServiceRole in %s namespace: %s", namespace, err)
+
+	}
+
+	for i := range srList.Items {
+		sr := srList.Items[i]
+		log.Printf("Index: %d ServiceRole Name: %+v\n", i, sr.Name)
+
+		for _, h := range sr.Spec.GetRules() {
+			log.Printf("Index: %d ServiceRole Rules: %+v\n", i, h)
+		}
+	}
+	// Test ServiceRoleBinding
+	srbList, err := ic.RbacV1alpha1().ServiceRoleBindings(namespace).List(metav1.ListOptions{})
+	if err != nil {
+		log.Fatalf("Failed to get ServiceRoleBinding in %s namespace: %s", namespace, err)
+
+	}
+	for i := range srbList.Items {
+		srb := srbList.Items[i]
+		log.Printf("ServiceRoleBindings Name: %+v\nServiceRoleReference: %+v\n", srb.Name, srb.Spec.GetRoleRef())
+
+	}
+
 }

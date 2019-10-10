@@ -10,12 +10,11 @@ fi
 SRC_DIR=$GOPATH/src
 CLIENT_DIR=$SRC_DIR/github.com/aspenmesh/istio-client-go
 
-CODE_GEN_VER=$(grep "k8s.io/code-generator =>" $CLIENT_DIR/go.mod | head -1 | cut -f 4 -d\ )
+go mod download
 
-go get k8s.io/code-generator/cmd/client-gen@$CODE_GEN_VER
+go install k8s.io/code-generator/cmd/client-gen
 
-# If this fails, go get k8s.io/code-generator
-CODE_GEN=$(go list -f '{{ .Dir }}' -m k8s.io/code-generator@$CODE_GEN_VER)
+CODE_GEN=$(go list -f '{{ .Dir }}' -m k8s.io/code-generator)
 
 chmod +x $CODE_GEN/generate-groups.sh
 

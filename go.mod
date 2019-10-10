@@ -23,7 +23,7 @@ require (
 	istio.io/api v0.0.0-20190820204432-483f2547d882
 	k8s.io/apimachinery v0.0.0-20190612205821-1799e75a0719
 	k8s.io/client-go v0.0.0-20190620085101-78d2af792bab
-	k8s.io/code-generator v0.0.0-00010101000000-000000000000 // indirect
+	k8s.io/code-generator v0.0.0-20190612205613-18da4a14b22b // indirect
 )
 
 replace (

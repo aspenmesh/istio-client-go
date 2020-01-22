@@ -21,15 +21,15 @@ require (
 	google.golang.org/appengine v1.6.2 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	istio.io/api v0.0.0-20190820204432-483f2547d882
-	k8s.io/apimachinery v0.0.0-20190612205821-1799e75a0719
+	k8s.io/apimachinery v0.0.0-20190913080033-27d36303b655
 	k8s.io/client-go v0.0.0-20190620085101-78d2af792bab
 	k8s.io/code-generator v0.0.0-20190612205613-18da4a14b22b // indirect
 )
 
 replace (
 	github.com/golang/protobuf => github.com/golang/protobuf v1.3.2
-	k8s.io/api => k8s.io/api v0.0.0-20190620084959-7cf5895f2711
-	k8s.io/apimachinery => k8s.io/apimachinery v0.0.0-20190612205821-1799e75a0719
-	k8s.io/client-go => k8s.io/client-go v0.0.0-20190620085101-78d2af792bab
-	k8s.io/code-generator => k8s.io/code-generator v0.0.0-20190612205613-18da4a14b22b
+	k8s.io/api => k8s.io/api v0.0.0-20191003000013-35e20aa79eb8
+	k8s.io/apimachinery => k8s.io/apimachinery v0.0.0-20190913080033-27d36303b655
+	k8s.io/client-go => k8s.io/client-go v0.0.0-20190918200256-06eb1244587a
+	k8s.io/code-generator => k8s.io/code-generator v0.0.0-20190927045949-f81bca4f5e85
 )

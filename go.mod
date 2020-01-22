@@ -20,7 +20,7 @@ require (
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
 	google.golang.org/appengine v1.6.2 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
-	istio.io/api v0.0.0-20190820204432-483f2547d882
+	istio.io/api v0.0.0-20191115173247-e1a1952e5b81
 	k8s.io/apimachinery v0.0.0-20190913080033-27d36303b655
 	k8s.io/client-go v0.0.0-20190620085101-78d2af792bab
 	k8s.io/code-generator v0.0.0-20190612205613-18da4a14b22b // indirect
